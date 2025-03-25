@@ -3,6 +3,7 @@ import { CreateKeyPage } from 'pages/CreateKeyPage';
 import { KeyPage } from 'pages/KeyPage';
 import { LoginPage } from 'pages/LoginPage';
 import { MainPage } from 'pages/MainPage';
+import { NotFoundPage } from 'pages/NotFoundPage';
 
 export type AppRoutesProps = RouteProps & {
 	authOnly?: boolean;
@@ -14,24 +15,25 @@ export enum Routes {
 	LOGIN = 'login',
 	KEY = 'key',
 	CREATE_KEY = 'createKey',
+	NOT_FOUND = 'notFound',
 }
 
-export type Path = '/' | '/login' | '/keys/:id' | '/create/key';
+export type Path = '/' | '/login' | '/keys/:id' | '/keys/create' | '*';
 
 export const RoutesPaths: Record<Routes, Path> = {
 	[Routes.MAIN]: '/',
 	[Routes.LOGIN]: '/login',
 	[Routes.KEY]: '/keys/:id',
-	[Routes.CREATE_KEY]: '/create/key',
-	// // 404
-	// [Routes.NOT_FOUND]: '*',
+	[Routes.CREATE_KEY]: '/keys/create',
+	// 404
+	[Routes.NOT_FOUND]: '*',
 };
 
 export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.MAIN]: {
 		path: RoutesPaths.main,
 		element: <MainPage />,
-		authOnly: true,
+		// authOnly: true,
 	},
 	[Routes.LOGIN]: {
 		path: RoutesPaths.login,
@@ -40,15 +42,15 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.KEY]: {
 		path: RoutesPaths.key,
 		element: <KeyPage />,
-		authOnly: true,
+		// authOnly: true,
 	},
 	[Routes.CREATE_KEY]: {
 		path: RoutesPaths.createKey,
 		element: <CreateKeyPage />,
-		authOnly: true,
+		// authOnly: true,
 	},
-	// [Routes.NOT_FOUND]: {
-	// 	path: RoutesPaths.notFound,
-	// 	element: <NotFoundPage />,
-	// },
+	[Routes.NOT_FOUND]: {
+		path: RoutesPaths.notFound,
+		element: <NotFoundPage />,
+	},
 };

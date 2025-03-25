@@ -12,4 +12,13 @@ body {
 .App {
   // TODO можно вынести в переменную
   padding-top: 50px;
+  height: 100%;
+  display: flex;
+  background-color: var(--mid-gray-bg-color);
+}
+
+.Page {
+  padding: 20px;
+  flex: 1;
+  overflow-y: scroll;
 }

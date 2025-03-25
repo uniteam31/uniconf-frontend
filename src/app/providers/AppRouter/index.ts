@@ -1,2 +1,2 @@
 export { AppRouter } from './ui/AppRouter';
-export { Path } from './routerConfig/routerConfig';
+export { Path, RoutesPaths } from './routerConfig/routerConfig';
