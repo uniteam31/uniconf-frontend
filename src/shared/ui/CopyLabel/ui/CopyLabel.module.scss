@@ -1,0 +1,15 @@
+.text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tooltip {
+  backdrop-color: var(--mid-gray-bg-color);
+  color: var(--dark-bg-color);
+}
+
+.icon {
+  color: var(--dark-bg-color);
+  cursor: copy;
+}

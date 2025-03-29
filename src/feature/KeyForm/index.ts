@@ -1,1 +1,1 @@
-export { KeyForm } from './ui/KeyForm';
+export { KeyFormWrapper as KeyForm } from './ui/KeyFormWrapper/KeyFormWrapper';

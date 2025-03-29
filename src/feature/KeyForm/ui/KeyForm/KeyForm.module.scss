@@ -1,0 +1,61 @@
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+}
+
+.error {
+  margin-bottom: 20px;
+}
+
+.form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.alert {
+  margin-top: 10px;
+}
+
+.textarea {
+  max-height: 120px;
+}
+
+.percentage {
+  display: flex;
+  gap: 20px;
+
+  .slider {
+    flex: 1;
+  }
+}
+
+.userSelect {
+  width: 100%;
+}
+
+.spaceDivider {
+  flex: 1;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  .secondary {
+    color: var(--dark-bg-color);
+    background-color: var(--default-bg-color);
+
+    &:hover {
+      background-color: var(--mid-gray-bg-color);
+    }
+
+    &:disabled {
+      background-color: var(--default-bg-color);
+      opacity: 0.4;
+    }
+  }
+}

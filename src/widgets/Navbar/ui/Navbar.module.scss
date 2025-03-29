@@ -15,6 +15,14 @@
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 .curUser {

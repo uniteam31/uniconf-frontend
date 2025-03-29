@@ -1,16 +1,18 @@
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { useUserStore } from 'entities/User';
+// import { useKeyStore } from 'entities/User';
 import { RoutesPaths } from 'shared/const';
 import { Button } from 'shared/ui';
 import s from './Sidebar.module.scss';
 
 export const Sidebar = () => {
-	const { authData } = useUserStore();
+	// const { authData } = useKeyStore();
 
 	// TODO delete mock
-	if (!authData) {
-		return null;
-	}
+	// if (!authData) {
+	// 	return null;
+	// }
+
 	return (
 		<div className={s.sidebar}>
 			<Link to={RoutesPaths.createKey}>
@@ -21,13 +23,9 @@ export const Sidebar = () => {
 				<Button className={s.secondaryButton}> Коллекция ключей </Button>
 			</Link>
 
-			<Link to={''}>
-				<Button className={s.secondaryButton}> Поиск id в ключах </Button>
-			</Link>
+			<Button className={classNames(s.secondaryButton, s.disabled)}> Поиск id в ключах </Button>
 
-			<Link to={''}>
-				<Button className={s.secondaryButton}> История изменений </Button>
-			</Link>
+			<Button className={classNames(s.secondaryButton, s.disabled)}> История изменений </Button>
 		</div>
 	);
 };

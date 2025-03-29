@@ -32,3 +32,4 @@ export {
 } from '@uniteam31/uni-shared-ui';
 export { BaseFormModal } from './BaseFormModal';
 export { CheckboxItem } from './CheckboxItem';
+export { CopyLabel } from './CopyLabel';
