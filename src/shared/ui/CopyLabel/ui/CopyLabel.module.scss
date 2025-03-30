@@ -1,12 +1,7 @@
 .text {
-  display: inline-flex;
   align-items: center;
+  display: inline-flex;
   gap: 8px;
-}
-
-.tooltip {
-  backdrop-color: var(--mid-gray-bg-color);
-  color: var(--dark-bg-color);
 }
 
 .icon {

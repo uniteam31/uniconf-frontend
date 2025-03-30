@@ -1,8 +1,8 @@
 .container {
-  width: 55%;
-  min-height: calc(100vh - 90px);
-  min-width: 350px;
   background-color: var(--default-bg-color);
   border-radius: var(--medium-round);
   display: flex;
+  min-height: calc(100vh - 90px);
+  min-width: 350px;
+  width: 55%;
 }

@@ -1,6 +1,6 @@
 .wrapper {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
   padding: 20px 30px;
 }
@@ -10,8 +10,8 @@
 }
 
 .form {
-  flex: 1;
   display: flex;
+  flex: 1;
   flex-direction: column;
 }
 
@@ -42,12 +42,12 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: flex-end;
   gap: 12px;
+  justify-content: flex-end;
 
   .secondary {
-    color: var(--dark-bg-color);
     background-color: var(--default-bg-color);
+    color: var(--dark-bg-color);
 
     &:hover {
       background-color: var(--mid-gray-bg-color);
