@@ -2,7 +2,7 @@ FROM --platform=linux/amd64 node:22
 
 # При деплое ОБЯЗАТЕЛЬНО указывать все ENV через Jenkins
 # Ставится в pipeline на Jenkins
-ARG BRANCH=dev
+ARG BRANCH=master
 ARG API_URL
 
 # INSTALL PACKAGES
@@ -36,5 +36,5 @@ RUN rm -rf /var/www/html
 RUN mv build /var/www/
 
 # EXPOSE PORT AND START NGINX
-EXPOSE 80
+EXPOSE 5000
 CMD ["nginx", "-g", "daemon off;"]

@@ -40,5 +40,6 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'off',
 		'react/display-name': 'off',
 		'react/prop-types': 'off',
+		'@conarti/feature-sliced/layers-slices': 'off',
 	},
 };

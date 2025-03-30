@@ -24,7 +24,7 @@ export const Navbar = () => {
 	const onTitleClick = () => navigate(RoutesPaths.main);
 
 	const handleLogout = () => {
-		alert('Выход из системы');
+		navigate(RoutesPaths.login);
 	};
 
 	const menuItems: MenuProps['items'] = [
