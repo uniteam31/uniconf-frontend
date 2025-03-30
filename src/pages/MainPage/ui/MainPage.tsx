@@ -1,7 +1,7 @@
 import { SearchOutlined } from '@ant-design/icons';
 import { Input, Typography } from 'antd';
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { KeysList } from 'widgets/KeysList';
 import s from './MainPage.module.scss';
 
@@ -10,6 +10,19 @@ const { Title } = Typography;
 
 export const MainPage = () => {
 	const [search, setSearch] = useState('');
+	const [debouncedSearch, setDebouncedSearch] = useState('');
+
+	useEffect(() => {
+		const timerId = setTimeout(() => {
+			setDebouncedSearch(search);
+		}, 300);
+
+		return () => clearTimeout(timerId);
+	}, [search]);
+
+	const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearch(e.target.value);
+	}, []);
 
 	return (
 		<div className={classNames(s.page, 'Page')}>
@@ -24,10 +37,10 @@ export const MainPage = () => {
 				enterButton
 				size="large"
 				prefix={<SearchOutlined />}
-				onChange={(e) => setSearch(e.target.value)}
+				onChange={handleSearchChange}
 			/>
 
-			<KeysList searchQuery={search} />
+			<KeysList searchQuery={debouncedSearch} />
 		</div>
 	);
 };
