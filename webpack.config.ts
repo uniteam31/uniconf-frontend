@@ -16,7 +16,7 @@ export default () => {
 
 	// env
 	const MODE: BuildMode = (process.env.MODE as BuildMode) || 'development';
-	const PORT = Number(process.env.PORT) || 5200;
+	const PORT = Number(process.env.PORT) || 5000;
 	const IS_DEV = MODE === 'development';
 	const API_URL = process.env.API_URL || 'http://localhost:5050/api';
 
