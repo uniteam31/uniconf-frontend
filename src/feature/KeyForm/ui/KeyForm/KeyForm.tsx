@@ -13,7 +13,7 @@ import {
 } from 'antd';
 import React, { useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
-import { type IKey, IKeyFormField } from 'entities/Key';
+import type { IKey, IKeyFormField } from 'entities/Key';
 import { CopyLabel } from 'shared/ui';
 import { useKeyCRUD } from '../../api/useKeyCRUD';
 import s from './KeyForm.module.scss';
