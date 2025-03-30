@@ -1,4 +1,4 @@
 export type TLoginFormField = {
-	login: string;
+	username: string;
 	password: string;
 };

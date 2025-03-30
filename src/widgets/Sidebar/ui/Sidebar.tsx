@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-// import { useKeyStore } from 'entities/User';
+import { useUserStore } from 'entities/User';
 import { RoutesPaths } from 'shared/const';
 import { Button } from 'shared/ui';
 import s from './Sidebar.module.scss';
 
 export const Sidebar = () => {
-	// const { authData } = useKeyStore();
+	const { authData } = useUserStore();
 
-	// TODO delete mock
-	// if (!authData) {
-	// 	return null;
-	// }
+	if (!authData) {
+		return null;
+	}
 
 	return (
 		<div className={s.sidebar}>

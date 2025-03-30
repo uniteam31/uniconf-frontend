@@ -1,5 +1,7 @@
 import { Form, Input, Button, Alert } from 'antd';
 import { useController, useFormContext } from 'react-hook-form';
+import { useUserStore } from 'entities/User';
+import { useLogin } from '../../api/useLogin';
 import { TLoginFormField } from '../../model/login';
 
 export const LoginForm = () => {
@@ -8,12 +10,12 @@ export const LoginForm = () => {
 		getValues,
 		formState: { isValid },
 	} = useFormContext<TLoginFormField>();
-	const error = '';
-	const isLoading = false;
+	const { initAuthData } = useUserStore();
+	const { login, error, isLoading } = useLogin();
 
 	const {
 		field: { value: username, onChange: onChangeUsername },
-	} = useController({ control, name: 'login', rules: { required: true } });
+	} = useController({ control, name: 'username', rules: { required: true } });
 
 	const {
 		field: { value: password, onChange: onChangePassword },
@@ -22,8 +24,9 @@ export const LoginForm = () => {
 	const handleSubmit = () => {
 		if (!isValid) return;
 
-		const formValues = getValues();
-		console.log(formValues);
+		login({ formValues: getValues() }).then(() => {
+			initAuthData();
+		});
 	};
 
 	return (

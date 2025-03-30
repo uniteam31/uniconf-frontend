@@ -18,12 +18,12 @@ export enum Routes {
 	NOT_FOUND = 'notFound',
 }
 
-export type Path = '/' | '/login' | '/keys/:id' | '/keys/create' | '*';
+export type Path = '/' | '/login' | '/keys/:name' | '/keys/create' | '*';
 
 export const RoutesPaths: Record<Routes, Path> = {
 	[Routes.MAIN]: '/',
 	[Routes.LOGIN]: '/login',
-	[Routes.KEY]: '/keys/:id',
+	[Routes.KEY]: '/keys/:name',
 	[Routes.CREATE_KEY]: '/keys/create',
 	// 404
 	[Routes.NOT_FOUND]: '*',
@@ -33,7 +33,7 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.MAIN]: {
 		path: RoutesPaths.main,
 		element: <MainPage />,
-		// authOnly: true,
+		authOnly: true,
 	},
 	[Routes.LOGIN]: {
 		path: RoutesPaths.login,
@@ -42,12 +42,12 @@ export const routerConfig: Record<Routes, AppRoutesProps> = {
 	[Routes.KEY]: {
 		path: RoutesPaths.key,
 		element: <KeyPage />,
-		// authOnly: true,
+		authOnly: true,
 	},
 	[Routes.CREATE_KEY]: {
 		path: RoutesPaths.createKey,
 		element: <CreateKeyPage />,
-		// authOnly: true,
+		authOnly: true,
 	},
 	[Routes.NOT_FOUND]: {
 		path: RoutesPaths.notFound,

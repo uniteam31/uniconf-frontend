@@ -27,7 +27,7 @@ export const MainPage = () => {
 				onChange={(e) => setSearch(e.target.value)}
 			/>
 
-			<KeysList search={search} />
+			<KeysList searchQuery={search} />
 		</div>
 	);
 };

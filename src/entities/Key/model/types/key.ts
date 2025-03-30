@@ -12,5 +12,5 @@ export interface IKeyFormField {
 
 export interface IKey extends TMeta, IKeyFormField {
 	number: number;
-	author: IUser;
+	owner: IUser;
 }

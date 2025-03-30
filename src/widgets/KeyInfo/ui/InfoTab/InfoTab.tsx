@@ -1,16 +1,16 @@
 import { UserOutlined, ClockCircleOutlined, NumberOutlined, EditOutlined } from '@ant-design/icons';
 import { Typography, Avatar, Space, Divider } from 'antd';
-import { IKey } from 'entities/Key';
+import { useKeyStore } from 'entities/Key';
 import { formatDate } from 'shared/lib';
 import s from './InfoTab.module.scss';
 
 const { Title, Text } = Typography;
 
-interface IProps {
-	confKey: IKey;
-}
+export const InfoTab = () => {
+	const { key: confKey } = useKeyStore();
 
-export const InfoTab = ({ confKey }: IProps) => {
+	if (!confKey) return null;
+
 	return (
 		<>
 			<Title level={4}>Обзор ключа</Title>
@@ -43,7 +43,7 @@ export const InfoTab = ({ confKey }: IProps) => {
 			<Divider orientation="left">Создатель ключа</Divider>
 			<Space size="middle">
 				<Avatar icon={<UserOutlined />} className={s.avatar} />
-				<Text strong>{confKey.author.firstName}</Text>
+				<Text strong>{confKey.owner.publicName}</Text>
 			</Space>
 		</>
 	);

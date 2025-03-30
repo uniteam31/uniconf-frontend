@@ -1,9 +1,21 @@
 import { CloseOutlined } from '@ant-design/icons';
-import { Slider, Input, Tag, Space, Form, InputNumber, Checkbox, Typography, Alert } from 'antd';
+import {
+	Slider,
+	Input,
+	Tag,
+	Space,
+	Form,
+	Button,
+	InputNumber,
+	Checkbox,
+	Typography,
+	Alert,
+} from 'antd';
 import React, { useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
-import { IKey, IKeyFormField } from 'entities/Key';
-import { Button, CopyLabel } from 'shared/ui';
+import { type IKey, IKeyFormField } from 'entities/Key';
+import { CopyLabel } from 'shared/ui';
+import { useKeyCRUD } from '../../api/useKeyCRUD';
 import s from './KeyForm.module.scss';
 
 const { Title } = Typography;
@@ -22,7 +34,7 @@ export const KeyForm = ({ confKey }: IProps) => {
 		reset,
 	} = useFormContext<IKeyFormField>();
 
-	const error = '';
+	const { error, isLoading, update, create } = useKeyCRUD();
 
 	// Состояния формы
 	const {
@@ -87,9 +99,11 @@ export const KeyForm = ({ confKey }: IProps) => {
 	// Отправка формы
 	const handleSubmit = () => {
 		const formValues = getValues();
-
-		console.log(formValues);
-		console.log(isValid, isDirty);
+		if (confKey) {
+			update({ formValues }).then((newData) => reset(newData));
+		} else {
+			create({ formValues }).finally();
+		}
 	};
 
 	const handleReset = () => {
@@ -215,8 +229,10 @@ export const KeyForm = ({ confKey }: IProps) => {
 						Сбросить
 					</Button>
 					<Button
+						type="primary"
 						onClick={handleSubmitContext(handleSubmit)}
 						disabled={confKey ? !isDirty : !isValid || !isDirty}
+						loading={isLoading}
 					>
 						Сохранить
 					</Button>

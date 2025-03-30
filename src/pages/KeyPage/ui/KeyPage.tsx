@@ -1,38 +1,31 @@
 import classNames from 'classnames';
 import { KeyForm } from 'feature/KeyForm';
+import { useEffect } from 'react';
+import { NotFoundPage } from 'pages/NotFoundPage';
 import { KeyInfo } from 'widgets/KeyInfo';
-import { IKey } from 'entities/Key';
-// import { Loader } from 'shared/ui';
+import { useKeyStore } from 'entities/Key';
+import { Loader } from 'shared/ui';
+import { useGetKey } from '../api/useGetKey';
 import s from './KeyPage.module.scss';
 
 export const KeyPage = () => {
-	const key: IKey = {
-		_id: '',
-		number: 1,
-		name: 'key_name_v1',
-		percentage: 10,
-		include: ['user1', 'user2'],
-		exclude: ['user3'],
-		description: '',
-		dangerous: true,
-		createdAt: new Date().toString(),
-		updatedAt: new Date().toString(),
-		author: {
-			_id: '',
-			avatar: '',
-			firstName: 'Author',
-			username: 'admin',
-		},
-	};
+	const { key, clearCurrentKey } = useKeyStore();
+	const { isLoading } = useGetKey();
 
-	// if (true) {
-	// 	return <Loader className={s.loader} />;
-	// }
+	useEffect(() => () => clearCurrentKey(), []);
+
+	if (isLoading) {
+		return <Loader className={s.loader} />;
+	}
+
+	if (!key) {
+		return <NotFoundPage />;
+	}
 
 	return (
 		<div className={classNames(s.page, 'Page')}>
 			<KeyForm confKey={key} />
-			<KeyInfo confKey={key} />
+			<KeyInfo />
 		</div>
 	);
 };
