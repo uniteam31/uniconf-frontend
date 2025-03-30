@@ -14,6 +14,7 @@ import {
 import React, { useState } from 'react';
 import { useController, useFormContext } from 'react-hook-form';
 import type { IKey, IKeyFormField } from 'entities/Key';
+import { useUserStore } from 'entities/User';
 import { CopyLabel } from 'shared/ui';
 import { useKeyCRUD } from '../../api/useKeyCRUD';
 import s from './KeyForm.module.scss';
@@ -33,6 +34,7 @@ export const KeyForm = ({ confKey }: IProps) => {
 		getValues,
 		reset,
 	} = useFormContext<IKeyFormField>();
+	const { authData } = useUserStore();
 
 	const { error, isLoading, update, create } = useKeyCRUD();
 
@@ -110,13 +112,25 @@ export const KeyForm = ({ confKey }: IProps) => {
 		reset();
 	};
 
+	const disabled = confKey && confKey?.owner._id !== authData?._id;
+
 	return (
 		<div className={s.wrapper}>
 			<Title level={3}>{confKey?.name ? <CopyLabel text={confKey.name} /> : 'Новый ключ'}</Title>
 
 			{error && <Alert className={s.error} message={error} type="error" showIcon />}
 
-			<Form layout="vertical" className={s.form}>
+			{/* Сообщение об отсутсвии прав */}
+			{disabled && (
+				<Alert
+					className={s.error}
+					message="У вас нет прав на редактирование этого ключа. Обратитесь к владельцу"
+					type="error"
+					showIcon
+				/>
+			)}
+
+			<Form layout="vertical" className={s.form} disabled={disabled}>
 				{/* Название ключа */}
 				{!confKey && (
 					<Form.Item label="Название ключа" required>
@@ -180,12 +194,12 @@ export const KeyForm = ({ confKey }: IProps) => {
 							onChange={(e) => setIncludeInput(e.target.value)}
 							onPressEnter={() => handleTagAdd(includeInput, 'include')}
 							onBlur={() => handleTagAdd(includeInput, 'include')}
-							placeholder="Введите userID и нажмите Enter"
+							placeholder="Введите userID или username и нажмите Enter"
 						/>
 						<Space wrap>
 							{include.map((user) => (
 								<Tag
-									closable
+									closable={!disabled}
 									closeIcon={<CloseOutlined />}
 									onClose={() => handleTagClose(user, 'include')}
 									key={`include-${user}`}
@@ -205,12 +219,12 @@ export const KeyForm = ({ confKey }: IProps) => {
 							onChange={(e) => setExcludeInput(e.target.value)}
 							onPressEnter={() => handleTagAdd(excludeInput, 'exclude')}
 							onBlur={() => handleTagAdd(excludeInput, 'exclude')}
-							placeholder="Введите userID и нажмите Enter"
+							placeholder="Введите userID или username и нажмите Enter"
 						/>
 						<Space wrap>
 							{exclude.map((user) => (
 								<Tag
-									closable
+									closable={!disabled}
 									closeIcon={<CloseOutlined />}
 									onClose={() => handleTagClose(user, 'exclude')}
 									key={`exclude-${user}`}
@@ -231,7 +245,7 @@ export const KeyForm = ({ confKey }: IProps) => {
 					<Button
 						type="primary"
 						onClick={handleSubmitContext(handleSubmit)}
-						disabled={confKey ? !isDirty : !isValid || !isDirty}
+						disabled={disabled || confKey ? !isDirty : !isValid || !isDirty}
 						loading={isLoading}
 					>
 						Сохранить

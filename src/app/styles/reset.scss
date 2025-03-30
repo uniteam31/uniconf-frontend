@@ -11,3 +11,12 @@ select {
 	font: inherit;
 	margin: 0;
 }
+
+/* Recolor slider in key form */
+:where(.css-dev-only-do-not-override-1a3rktk).ant-slider.ant-slider-disabled .ant-slider-track {
+	background-color: #91caff !important;
+}
+
+:where(.css-dev-only-do-not-override-1a3rktk).ant-input-number-disabled .ant-input-number-input, :where(.css-dev-only-do-not-override-1a3rktk).ant-input-number-readonly .ant-input-number-input {
+	color: var(--dark-bg-color);
+}

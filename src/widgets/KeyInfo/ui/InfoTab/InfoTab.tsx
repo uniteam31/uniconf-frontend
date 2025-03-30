@@ -34,13 +34,13 @@ export const InfoTab = () => {
 			</Space>
 
 			{/* Описание */}
-			<Divider orientation="left">Описание ключа</Divider>
-			<Text type="secondary" className={s.description}>
+			<Divider orientation="left"> Описание ключа </Divider>
+			<Text type={!confKey.description ? 'secondary' : undefined} className={s.description}>
 				{confKey.description || 'Описание отсутствует'}
 			</Text>
 
-			{/* Создатель */}
-			<Divider orientation="left">Создатель ключа</Divider>
+			{/* Владелец */}
+			<Divider orientation="left"> Владелец ключа </Divider>
 			<Space size="middle">
 				<Avatar icon={<UserOutlined />} className={s.avatar} />
 				<Text strong>{confKey.owner.publicName}</Text>
